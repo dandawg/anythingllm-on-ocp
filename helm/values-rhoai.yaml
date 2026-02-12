@@ -1,0 +1,37 @@
+# RHOAI-specific overrides for AnythingLLM
+# This file configures AnythingLLM to use RHOAI for LLM and embeddings
+
+namespace: demo-apps
+
+# Environment variables for AnythingLLM
+env:
+  # OpenAI API compatibility mode
+  - name: LLM_PROVIDER
+    value: "generic-openai"
+  - name: GENERIC_OPEN_AI_BASE_PATH
+    value: "http://RHOAI_INFERENCE_SERVICE_URL/v1"
+  - name: GENERIC_OPEN_AI_MODEL_PREF
+    value: "granite-7b-instruct"
+  - name: GENERIC_OPEN_AI_MODEL_TOKEN_LIMIT
+    value: "8192"
+  # Embedding configuration
+  - name: EMBEDDING_ENGINE
+    value: "generic-openai"
+  - name: EMBEDDING_BASE_PATH
+    value: "http://RHOAI_EMBEDDING_SERVICE_URL/v1"
+  - name: EMBEDDING_MODEL_PREF
+    value: "granite-7b-instruct"
+  # Vector database - using built-in LanceDB
+  - name: VECTOR_DB
+    value: "lancedb"
+  # Disable telemetry
+  - name: DISABLE_TELEMETRY
+    value: "true"
+  # Disable TLS certificate validation for internal cluster services
+  # This allows AnythingLLM to connect to RHOAI InferenceServices with self-signed certs
+  - name: NODE_TLS_REJECT_UNAUTHORIZED
+    value: "0"
+
+# ChromaDB is disabled - using built-in LanceDB instead
+chromadb:
+  enabled: false

@@ -1,0 +1,44 @@
+# Default values for AnythingLLM
+namespace: demo-apps
+
+image:
+  repository: mintplexlabs/anythingllm
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicas: 1
+
+service:
+  type: ClusterIP
+  port: 3001
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+  limits:
+    cpu: "2"
+    memory: "4Gi"
+
+# Storage for AnythingLLM data
+storage:
+  size: 10Gi
+  storageClassName: ""  # Use default storage class
+
+# Vector database configuration
+vectorDatabase:
+  type: "lancedb"  # Built-in LanceDB (default), or chroma, pinecone, weaviate, etc.
+  
+# LLM configuration (will be overridden by values-rhoai.yaml)
+llm:
+  provider: "openai"
+  baseUrl: ""
+  model: ""
+  apiKey: ""
+
+# Embedding configuration
+embedding:
+  provider: "openai"
+  baseUrl: ""
+  model: ""
+  apiKey: ""

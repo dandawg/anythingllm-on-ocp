@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anythingllm
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: anythingllm
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: anythingllm
+  template:
+    metadata:
+      labels:
+        app: anythingllm
+    spec:
+      serviceAccountName: anythingllm
+      securityContext:
+        fsGroup: 0
+      containers:
+        - name: oauth-proxy
+          image: quay.io/openshift/origin-oauth-proxy:4.15
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: oauth-proxy
+          args:
+            - --http-address=:8080
+            - --https-address=
+            - --provider=openshift
+            - --openshift-service-account=anythingllm
+            - --upstream=http://localhost:3001
+            - --cookie-secret=SECRET
+            - --skip-provider-button=true
+        - name: anythingllm
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 3001
+              name: http
+          env:
+            - name: STORAGE_DIR
+              value: "/app/server/storage"
+{{- if .Values.env }}
+{{- toYaml .Values.env | nindent 12 }}
+{{- end }}
+          volumeMounts:
+            - name: storage
+              mountPath: /app/server/storage
+          resources:
+{{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: anythingllm-storage

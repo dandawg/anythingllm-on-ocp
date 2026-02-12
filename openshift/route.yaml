@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: anythingllm
+  namespace: anythingllm
+  labels:
+    app: anythingllm
+spec:
+  to:
+    kind: Service
+    name: anythingllm-oauth-proxy
+  port:
+    targetPort: oauth-proxy
+  tls:
+    termination: reencrypt
+    insecureEdgeTerminationPolicy: Redirect

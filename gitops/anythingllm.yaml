@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: anythingllm
+  namespace: openshift-gitops
+  labels:
+    app.kubernetes.io/name: anythingllm
+    app.kubernetes.io/part-of: rhoai-demos
+    app.kubernetes.io/component: application
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dandawg/anythingllm-on-ocp.git
+    targetRevision: main
+    path: apps/3rd-party-apps/anythingllm/helm
+    helm:
+      valueFiles:
+        - values-rhoai.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo-apps
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 5m
+  ignoreDifferences: []

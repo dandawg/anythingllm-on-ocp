@@ -1,0 +1,13 @@
+apiVersion: v2
+name: anythingllm
+description: AnythingLLM - A full-stack application that turns documents into chatbots
+type: application
+version: 1.0.0
+appVersion: "latest"
+keywords:
+  - llm
+  - rag
+  - ai
+  - chatbot
+maintainers:
+  - name: Red Hat AI Americas
