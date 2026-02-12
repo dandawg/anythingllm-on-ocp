@@ -11,7 +11,9 @@ env:
   - name: GENERIC_OPEN_AI_BASE_PATH
     value: "http://RHOAI_INFERENCE_SERVICE_URL/v1"
   - name: GENERIC_OPEN_AI_MODEL_PREF
-    value: "granite-7b-instruct"
+    value: "qwen3-vl-4b"
+  - name: GENERIC_OPEN_AI_API_KEY
+    value: ""
   - name: GENERIC_OPEN_AI_MODEL_TOKEN_LIMIT
     value: "8192"
   # Embedding configuration
@@ -20,7 +22,9 @@ env:
   - name: EMBEDDING_BASE_PATH
     value: "http://RHOAI_EMBEDDING_SERVICE_URL/v1"
   - name: EMBEDDING_MODEL_PREF
-    value: "granite-7b-instruct"
+    value: "qwen3-vl-embedding-2b"
+  - name: GENERIC_OPEN_AI_EMBEDDING_API_KEY
+    value: ""
   # Vector database - using built-in LanceDB
   - name: VECTOR_DB
     value: "lancedb"
@@ -31,6 +35,11 @@ env:
   # This allows AnythingLLM to connect to RHOAI InferenceServices with self-signed certs
   - name: NODE_TLS_REJECT_UNAUTHORIZED
     value: "0"
+
+# Storage configuration
+storage:
+  size: 20Gi
+  storageClassName: ""  # Use default storage class, or specify one (e.g., "gp3-csi")
 
 # ChromaDB is disabled - using built-in LanceDB instead
 chromadb:

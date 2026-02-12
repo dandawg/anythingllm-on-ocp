@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/dandawg/anythingllm-on-ocp.git
     targetRevision: main
-    path: apps/3rd-party-apps/anythingllm/helm
+    path: helm
     helm:
       valueFiles:
         - values-rhoai.yaml
