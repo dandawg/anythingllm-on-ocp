@@ -5,6 +5,8 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     app: anythingllm
+  annotations:
+    argocd.argoproj.io/sync-wave: "41"
 spec:
   replicas: {{ .Values.replicas }}
   selector:

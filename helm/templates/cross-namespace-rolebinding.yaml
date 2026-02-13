@@ -6,6 +6,8 @@ metadata:
   namespace: demo
   labels:
     app: anythingllm
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
 rules:
   - apiGroups:
       - serving.kserve.io
@@ -22,6 +24,8 @@ metadata:
   namespace: demo
   labels:
     app: anythingllm
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
