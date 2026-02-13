@@ -12,10 +12,18 @@ This deployment includes:
 
 ## Prerequisites
 
-- OpenShift cluster with admin access
+- OpenShift 4.19+ with admin access
 - RHOAI deployed with at least one InferenceService
 - Helm 3 installed (for direct deployment)
 - OpenShift GitOps/ArgoCD (for GitOps deployment)
+
+### Install OpenShift GitOps (if needed)
+
+```bash
+./bootstrap.sh
+```
+
+**Note:** If GitOps is already installed (e.g., from deploying another repository), the bootstrap script will detect it and skip installation.
 
 ## Deployment Options
 
