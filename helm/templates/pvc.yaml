@@ -6,7 +6,7 @@ metadata:
   labels:
     app: anythingllm
   annotations:
-    argocd.argoproj.io/sync-wave: "40"
+    argocd.argoproj.io/sync-wave: "41"
 spec:
   accessModes:
     - ReadWriteOnce
