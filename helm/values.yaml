@@ -14,11 +14,11 @@ service:
 
 resources:
   requests:
-    cpu: "500m"
-    memory: "1Gi"
+    cpu: "4"
+    memory: "8Gi"
   limits:
-    cpu: "2"
-    memory: "4Gi"
+    cpu: "8"
+    memory: "12Gi"
 
 # Storage for AnythingLLM data
 storage:
