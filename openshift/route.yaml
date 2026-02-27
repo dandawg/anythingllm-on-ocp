@@ -8,9 +8,9 @@ metadata:
 spec:
   to:
     kind: Service
-    name: anythingllm-oauth-proxy
+    name: anythingllm
   port:
-    targetPort: oauth-proxy
+    targetPort: http
   tls:
-    termination: reencrypt
+    termination: edge
     insecureEdgeTerminationPolicy: Redirect

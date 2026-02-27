@@ -21,20 +21,6 @@ spec:
       securityContext:
         fsGroup: 0
       containers:
-        - name: oauth-proxy
-          image: quay.io/openshift/origin-oauth-proxy:4.15
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-              name: oauth-proxy
-          args:
-            - --http-address=:8080
-            - --https-address=
-            - --provider=openshift
-            - --openshift-service-account=anythingllm
-            - --upstream=http://localhost:3001
-            - --cookie-secret=SECRET
-            - --skip-provider-button=true
         - name: anythingllm
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
